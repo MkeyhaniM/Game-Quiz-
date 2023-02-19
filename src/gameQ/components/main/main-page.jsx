@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 
 import { FormLoginSign } from "./login-sign/index";
-import { Title } from "./title";
+import { Title } from "./titleOfGameQuiz/title";
 
 export function MainPage() {
   return (
