@@ -4,15 +4,14 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-import {FetchPost} from "./../operationOfRequest/axiosOperation"
+import {FetchPost} from "../operationOfRequest/axiosOperation"
 import {HandelCatch} from "./handelCatch/handelCatch";
-import {ContextDispatchOfReducer} from "../../context/contextGameQuiz";
+import {ContextDispatchOfReducer} from '../../../context/contextGameQuiz';
 
 export function FormSign() {
     const dispatch = ContextDispatchOfReducer()
-    const [existUser, setexistUser] = useState(null);
+    const [existUser, setExistUser] = useState(null);
     const [user, setUser] = useState(null);
-
     const [personalInformation, setPersonalInformation] = useState({
         email: null,
         password: null,
@@ -21,19 +20,19 @@ export function FormSign() {
     });
 
     let doSubmit = (e) => {
+        e.preventDefault();
 
-        e.preventDefault()
         FetchPost(personalInformation)
             .then(({data, success, token}) => {
+                if (success) {
+                    setExistUser(token)
+                    setUser(data)
+                }
                 dispatch(
                     {
                         type: "LOGIN_REQUEST"
                     }
                 )
-                if (success) {
-                    setexistUser(token)
-                    setUser(data)
-                }
             })
             .catch(error => {
                 dispatch(
@@ -60,7 +59,7 @@ export function FormSign() {
                 }
             )
         }
-    }, [existUser,dispatch])
+    }, [existUser, dispatch])
 
     return (
         <Form>
