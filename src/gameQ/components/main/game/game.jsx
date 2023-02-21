@@ -1,7 +1,9 @@
 import React from "react";
+import {Quiz} from "../../../quiz/quiz";
+
 
 export function Game_quiz() {
     return (
-        <div>Game_quiz</div>
+        <div>{JSON.stringify(Quiz)}</div>
     )
 }
