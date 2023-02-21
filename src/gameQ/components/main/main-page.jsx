@@ -2,7 +2,8 @@ import React, {Fragment} from "react";
 
 import {FormLoginSign} from "./login-sign/index";
 import {Title} from "./titleOfGameQuiz/title";
-import {ContextOfGameQuiz} from "./context/contextGameQuiz";
+import {ContextOfGameQuiz} from "../context/contextGameQuiz";
+
 
 export function MainPage() {
     return (
