@@ -26,7 +26,6 @@ app.post('/post', (req, res) => {
             data: req.body,
             token: null,
             error: true,
-            mass: req.body
         })
     }
 })
