@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-import {FetchPost} from "../operationOfRequest/axiosOperation"
+import {FetchPost} from "../operationOfRequest/axiosOperation";
 import {HandelCatch} from "./handelCatch/handelCatch";
 import {ContextDispatchOfReducer} from '../../../context/contextGameQuiz';
 
