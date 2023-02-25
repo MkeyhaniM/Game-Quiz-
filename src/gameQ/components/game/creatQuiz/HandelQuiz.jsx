@@ -1,5 +1,4 @@
-import React from "react"
-
+import React, {useState, useEffect} from "react";
 import {Quiz} from "../../../quiz/quiz";
 import {shuffle} from "../mixQuiz/mixQuestionAndAnswers";
 import {CreateQ} from "./quiz/quizQuestion"
@@ -11,37 +10,59 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import {RadioOf} from "./radioOf/radioOf";
 
-var shuffledQuestionArray = shuffle(Quiz);
+var shuffledQuestionArray = shuffle(Quiz)
 var counterQuestion = 0;
 
+
+function showAnswerInOptions(ICR, CA, SAA) {
+    for (var i = 0; i < SAA.length; i++) {
+        if (SAA[ICR] === CA) {
+            console.log("hello")
+            return (<Options getCorrect={true} Options={SAA[ICR]}/>)
+            break;
+        } else {
+            console.log("bye")
+            return (<Options getCorrect={false} Options={SAA}/>)
+            break;
+        }
+    }
+}
+
 function Q() {
-    var selectedQuiz = shuffledQuestionArray[counterQuestion];
-    var shuffledAnswerArray = shuffle(selectedQuiz.Test);
+    const [indexClickedRadio, setIndexClickedRadio] = useState(-1);
+    const [condition, setCondition] = useState(false);
+    const [selectedQuiz, setSelectedQuiz] = useState(shuffledQuestionArray[counterQuestion]);
+    const [conrrectAnswer, setConrrectAnswer] = useState(selectedQuiz.Answer);
+    const [shuffledAnswerArray, setShuffledAnswerArray] = useState(shuffle(selectedQuiz.Test));
     var DA = selectedQuiz.DescriptionAboutAnswer ? selectedQuiz.DescriptionAboutAnswer : null;
 
-    return (
-        <>
-            <CreateQ counterQuestion={counterQuestion + 1} name="mahyarKeyhani" question={selectedQuiz.Question}/>
-            <Options Options={shuffledAnswerArray}/>
-            <RadioOf/>
-            <Container>
-                <Row>
-                    <Col>
-                        <NextQuiz/>
-                    </Col>
-                    <Col>
-                        <DescriptionOfQuestion DescriptionAnwser={DA}/>
-                    </Col>
-                </Row>
-            </Container>
-        </>
-    )
+    function CheckAnwser(e) {
+        setIndexClickedRadio(Number(e.target.getAttribute('data-index')));
+        setCondition(true)
+    }
+
+    return (<>
+        <CreateQ counterQuestion={counterQuestion + 1} name="mahyarKeyhani" question={selectedQuiz.Question}/>
+
+        {condition && showAnswerInOptions(indexClickedRadio, conrrectAnswer, shuffledAnswerArray)}
+        {!condition && <Options getCorrect={null} Options={shuffledAnswerArray}/>}
+
+        <RadioOf selectedClicetAnswer={CheckAnwser}/>
+        <Container>
+            <Row>
+                <Col>
+                    <NextQuiz/>
+                </Col>
+                <Col>
+                    <DescriptionOfQuestion DescriptionAnwser={DA}/>
+                </Col>
+            </Row>
+        </Container>
+    </>)
 }
 
 export function HandelQuiz() {
-    return (
-        <div className={`container Quiz${counterQuestion}`}>
-            <Q/>
-        </div>
-    )
+    return (<div className={`container Quiz${counterQuestion}`}>
+        <Q/>
+    </div>)
 }
