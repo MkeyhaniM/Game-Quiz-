@@ -33,7 +33,7 @@ function Q() {
                         <NextQuiz/>
                     </Col>
                     <Col>
-                        <DescriptionOfQuestion DescriptionAnwser={DA}/>
+                        <DescriptionOfQuestion DescriptionAnswer={DA}/>
                     </Col>
                 </Row>
             </Container>
