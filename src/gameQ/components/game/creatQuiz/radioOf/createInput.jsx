@@ -1,6 +1,6 @@
 import Form from "react-bootstrap/Form";
 import Col from 'react-bootstrap/Col';
-export function Radio({name, check, index}) {
+export function Radio({name, check, index,getDisabled}) {
     return (
         <>
             <Col className='text text-center'>
@@ -10,6 +10,7 @@ export function Radio({name, check, index}) {
                         onChange={e => check(e)}
                         className='px-2'
                         inline
+                        disabled={getDisabled}
                         data-index={index}
                         name="group1"
                         type='radio'
