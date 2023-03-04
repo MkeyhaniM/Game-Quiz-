@@ -10,15 +10,18 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import {RadioOf} from "./radioOf/radioOf";
 import {pro} from "../game";
+import {Score} from "./score/score";
 
 
 function Q() {
     const context = useContext(pro);
     var DA = context.selectedQuiz.DescriptionAboutAnswer ? context.selectedQuiz.DescriptionAboutAnswer : null;
     const [indexClickedRadio, setIndexClickedRadio] = useState(null);
+    const [checkDisabled, setCheckDisabled] = useState(false);
 
     function CheckAnswer(e) {
         setIndexClickedRadio(Number(e.target.getAttribute('data-index')));
+        setCheckDisabled(true)
     }
 
     return (
@@ -26,7 +29,7 @@ function Q() {
             <CreateQ counterQuestion={context.counter + 1} name="Mahyar-Keyhani"
                      question={context.selectedQuiz.Question}/>
             <Options Options={context.shuffledTests} check={indexClickedRadio} Answer={context.Answer}/>
-            <RadioOf selectedClicetAnswer={CheckAnswer}/>
+            <RadioOf getDisabled={checkDisabled} selectedClientAnswer={CheckAnswer}/>
             <Container>
                 <Row>
                     <Col>
@@ -36,6 +39,7 @@ function Q() {
                         <DescriptionOfQuestion DescriptionAnswer={DA}/>
                     </Col>
                 </Row>
+                <Score/>
             </Container>
         </>
     )
@@ -43,7 +47,9 @@ function Q() {
 
 export function HandelQuiz() {
     const context = useContext(pro);
-    return (<div className={`container Quiz${context.counter}`}>
-        <Q/>
-    </div>)
+    return (
+        <div className={`container Quiz${context.counter}`}>
+            <Q/>
+        </div>
+    )
 }
