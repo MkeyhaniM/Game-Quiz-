@@ -3,6 +3,7 @@ import Badge from 'react-bootstrap/Badge';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import {CheckTypeOfAnswer} from "../score/score";
 
 export function Options(props) {
     const word = ['A', 'B', 'C', 'D']
@@ -34,7 +35,6 @@ export function Options(props) {
                         </Col>
                     </Fragment>)
             } else if (isCorrect) {
-                console.log('level' + index)
                 return (
                     <Fragment>
                         <Col
@@ -75,6 +75,7 @@ export function Options(props) {
         } else {
             return word.map((Op, index) => {
                 if (props.Options[props.check] === props.Answer && index === props.check) {
+                    CheckTypeOfAnswer({type: 'correctAnswer', score: 10})
                     return (
                         <Fragment key={index + Op}>
                             <CreateOption isCorrect={true} CounterWord={Op} background={backgroundDefault[0]}
@@ -82,7 +83,7 @@ export function Options(props) {
                         </Fragment>
                     )
                 } else if (props.Options[props.check] !== props.Answer && index === props.check) {
-
+                    CheckTypeOfAnswer({type: 'wrongAnswer', score: 0})
                     return (
                         <Fragment key={index + Op}>
                             <CreateOption isCorrect={false} CounterWord={Op} background={backgroundDefault[1]}
