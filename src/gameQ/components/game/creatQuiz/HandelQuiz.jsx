@@ -1,6 +1,4 @@
 import React, {useState, useContext} from "react";
-import {Quiz} from "../../../quiz/quiz";
-import {shuffle} from "../mixQuiz/mixQuestionAndAnswers";
 import {CreateQ} from "./quiz/quizQuestion"
 import {Options} from "./Options/options";
 import {DescriptionOfQuestion} from "./descriptionOfQuestion/descriptionOfQuestion";
@@ -13,7 +11,7 @@ import {pro} from "../game";
 import {Score} from "./score/score";
 
 
-function Q() {
+function Q({B_GET_N_Q}) {
     const context = useContext(pro);
     var DA = context.selectedQuiz.DescriptionAboutAnswer ? context.selectedQuiz.DescriptionAboutAnswer : null;
     const [indexClickedRadio, setIndexClickedRadio] = useState(null);
@@ -22,18 +20,21 @@ function Q() {
     function CheckAnswer(e) {
         setIndexClickedRadio(Number(e.target.getAttribute('data-index')));
         setCheckDisabled(true)
+
     }
 
     return (
         <>
-            <CreateQ counterQuestion={context.counter + 1} name="Mahyar-Keyhani"
+            <CreateQ name="Mahyar-Keyhani"
                      question={context.selectedQuiz.Question}/>
+            {/*///////////////*/}
             <Options Options={context.shuffledTests} check={indexClickedRadio} Answer={context.Answer}/>
+            {/*///////HATE TO CHECK////////*/}
             <RadioOf getDisabled={checkDisabled} selectedClientAnswer={CheckAnswer}/>
             <Container>
                 <Row>
                     <Col>
-                        <NextQuiz/>
+                        <NextQuiz B_GET_N_Q={B_GET_N_Q} check={checkDisabled}/>
                     </Col>
                     <Col>
                         <DescriptionOfQuestion DescriptionAnswer={DA}/>
@@ -45,11 +46,11 @@ function Q() {
     )
 }
 
-export function HandelQuiz() {
+export function HandelQuiz({GET_N_Q}) {
     const context = useContext(pro);
     return (
-        <div className={`container Quiz${context.counter}`}>
-            <Q/>
+        <div className={`container Quiz`}>
+            <Q B_GET_N_Q={GET_N_Q}/>
         </div>
     )
 }
