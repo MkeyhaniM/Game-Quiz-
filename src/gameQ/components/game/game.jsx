@@ -3,18 +3,27 @@ import {HandelQuiz} from "./creatQuiz/HandelQuiz";
 import {Quiz} from "../../quiz/quiz";
 import {shuffle} from "./mixQuiz/mixQuestionAndAnswers"
 
+const arr = shuffle(Quiz)
+
 export const pro = createContext(null)
 
+
 export function Game_quiz() {
-    const [sh_array, setSh_array] = useState(shuffle(Quiz));
     const [counterQuestion, setCounterQuestion] = useState(0);
-    const [selectedQuiz, setSelectedQuiz] = useState(sh_array[counterQuestion]);
-    const sendInformationQuiz = {selectedQuiz, shuffledTests: shuffle(selectedQuiz.Test), counter: counterQuestion,Answer: selectedQuiz.Answer}
+    const [selectedQuiz, setSelectedQuiz] = useState(arr[counterQuestion]); // selected a quiz from sh_array[counterQuestion]
+    const [sendInformationQuiz, setSendInformationQuiz] = useState({
+        selectedQuiz,
+        shuffledTests: shuffle(selectedQuiz.Test),
+        Answer: selectedQuiz.Answer
+    });
+    function getNextQuiz() {
+        setCounterQuestion(prevState => prevState + 1)
+    }
 
 
     return (
         <pro.Provider value={sendInformationQuiz}>
-            <HandelQuiz qc={counterQuestion}/>
+            <HandelQuiz GET_N_Q={getNextQuiz} qc={counterQuestion}/>
         </pro.Provider>
-    )
+    );
 }
