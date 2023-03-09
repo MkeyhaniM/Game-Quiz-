@@ -6,8 +6,8 @@ import Col from 'react-bootstrap/Col';
 import {CheckTypeOfAnswer} from "../score/score";
 
 export function Options(props) {
-    const word = ['A', 'B', 'C', 'D']
-    const backgroundDefault = ['bg-success', 'bg-danger', 'bg-light']
+    const word = ['A', 'B', 'C', 'D'];
+    const backgroundDefault = ['bg-success', 'bg-danger', 'bg-light'];
 
     function CreateOption({CounterWord, index, background, isCorrect}) {
         function getCorrectOption() {
@@ -63,7 +63,6 @@ export function Options(props) {
             }
         })
     }
-
     function CheckTypeOfOperation() {
         Details(props.Options, props.Answer)
         if (props.check == null) {
