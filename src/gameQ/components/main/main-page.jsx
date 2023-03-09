@@ -1,4 +1,4 @@
-import React, {Fragment} from "react";
+import {Fragment} from "react";
 
 import {FormLoginSign} from "./login-sign/index";
 import {Title} from "./titleOfGameQuiz/title";
