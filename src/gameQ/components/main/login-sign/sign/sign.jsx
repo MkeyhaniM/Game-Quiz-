@@ -1,12 +1,11 @@
-import React, {useEffect, useState} from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
+import { useEffect, useState, useRef } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-import {FetchPost} from "../operationOfRequest/axiosOperation";
-import {HandelCatch} from "./handelCatch/handelCatch";
-import {ContextDispatchOfReducer} from '../../../context/contextGameQuiz';
+import { FetchPost } from "../operationOfRequest/axiosOperation";
+import { HandelCatch } from "./handelCatch/handelCatch";
+import { ContextDispatchOfReducer } from '../../../context/contextGameQuiz';
 
 export function FormSign() {
     const dispatch = ContextDispatchOfReducer()
@@ -18,13 +17,16 @@ export function FormSign() {
         number: null,
         country: null,
     });
+    const getCheckedFromSubmt = useRef();
 
     let doSubmit = (e) => {
         e.preventDefault();
-
         FetchPost(personalInformation)
-            .then(({data, success, token}) => {
+            .then(({ data, success, token }) => {
                 if (success) {
+                    if (getCheckedFromSubmt.current.checked) {
+                        localStorage.setItem('Game-Quiz', JSON.stringify(data))
+                    }
                     setExistUser(token)
                     setUser(data)
                 }
@@ -39,11 +41,11 @@ export function FormSign() {
                     {
                         type: "LOGIN_ERROR",
                         payload: {
-                            error: {error}
+                            error: { error }
                         }
                     }
                 )
-                // <HandelCatch massage={error}/>
+                return <HandelCatch massage={error} />
             })
     }
 
@@ -71,7 +73,7 @@ export function FormSign() {
                 >
                     <Form.Label>Email address</Form.Label>
                     <Form.Control
-                        onChange={(e) => setPersonalInformation({...personalInformation, email: e.target.value})}
+                        onChange={(e) => setPersonalInformation({ ...personalInformation, email: e.target.value })}
                         type="email"
                         placeholder="Enter email"
                     />
@@ -82,7 +84,7 @@ export function FormSign() {
                 <Form.Group as={Col} className="mb-3" controlId="formBasicPassword">
                     <Form.Label>Password</Form.Label>
                     <Form.Control
-                        onChange={(e) => setPersonalInformation({...personalInformation, password: e.target.value})}
+                        onChange={(e) => setPersonalInformation({ ...personalInformation, password: e.target.value })}
                         type="password"
                         placeholder="Password"
                     />
@@ -93,7 +95,7 @@ export function FormSign() {
                 <Form.Group as={Col}>
                     <Form.Label>Number</Form.Label>
                     <Form.Control
-                        onChange={(e) => setPersonalInformation({...personalInformation, number: e.target.value})}
+                        onChange={(e) => setPersonalInformation({ ...personalInformation, number: e.target.value })}
                         type="number"
                         placeholder="+9924642316"
                     />
@@ -103,7 +105,7 @@ export function FormSign() {
                         Which country do you want to play ?
                     </Form.Label>
                     <Form.Select
-                        onChange={(e) => setPersonalInformation({...personalInformation, country: e.target.value})}
+                        onChange={(e) => setPersonalInformation({ ...personalInformation, country: e.target.value })}
                         id="disabledSelect"
                     >
                         <option>Disabled select</option>
@@ -126,7 +128,7 @@ export function FormSign() {
 
             <Row className="md-1 mt-3">
                 <Form.Group as={Col} controlId="formBasicCheckbox">
-                    <Form.Check type="checkbox" label="Check me out"/>
+                    <Form.Check type="checkbox" ref={getCheckedFromSubmt} label="Check me out" />
                 </Form.Group>
             </Row>
             <Button className="mt-4 text text-center" variant="success" onClick={e => doSubmit(e)} type="submit">
