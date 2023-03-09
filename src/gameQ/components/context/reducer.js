@@ -1,4 +1,4 @@
-import {TypeAction} from "./typeAction";
+import { TypeAction } from "./typeAction";
 
 export let Reducer = (STATE, ACTION) => {
     switch (ACTION.type) {
@@ -14,7 +14,7 @@ export let Reducer = (STATE, ACTION) => {
             )
             break;
         case TypeAction.LOGIN_SUCCESS:
-            const {user, token} = ACTION.payload
+            const { user, token } = ACTION.payload
             return (
                 {
                     ...STATE,
@@ -26,7 +26,7 @@ export let Reducer = (STATE, ACTION) => {
             )
             break;
         case TypeAction.LOGIN_ERROR:
-            const {error} = ACTION.payload
+            const { error } = ACTION.payload
             return (
                 {
                     ...STATE,
@@ -37,7 +37,7 @@ export let Reducer = (STATE, ACTION) => {
                 }
             )
             break;
-        case TypeAction.LOGOUT :
+        case TypeAction.LOGOUT:
             return (
                 {
                     ...STATE,
