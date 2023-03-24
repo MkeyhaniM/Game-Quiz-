@@ -23,11 +23,11 @@ First , you should run : <i> npm run server </i> (in terminal) and second run : 
     <h4>Looking around GameQuiz</h4>
     <div style="display: flex">
         <div>
-        Sign in GameQuiz
+        <h4>Sign in GameQuiz</h4>
         <img src="public/assets/img/gameQuiz1.PNG" alt="gameQuiz">
         </div>
         <div>
-        Playing GameQuiz
+        <h4>Playing GameQuiz</h4>
         <img src="public/assets/img/gameQuiz2.PNG" alt="gameQuiz">
         </div>
     </div>
