@@ -4,11 +4,13 @@ A quiz game made by React .
 
 All questions are one hundred for now .
 
-First , you should run : npm run server (in terminal) and second run : npm start , and enjoy it , also you set a
-localstorage for next time .
 
 <div>
-    Some packages had been useful and necessary 
+First , you should run : <i> npm run server </i> (in terminal) and second run : npm start , and enjoy it ,also you set a localstorage for next time. 
+</div>
+
+<div>
+    <h3>Some packages had been useful and necessary </h3>
     <ul>
         <li>Ex React-bootstrap</li>
         <li>Sweetalert</li>
